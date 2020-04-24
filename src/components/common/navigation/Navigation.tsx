@@ -17,6 +17,16 @@ export const Navigation: React.FunctionComponent = (props) => {
         </li>
         <li>
           <a
+            href="/courses"
+            className={
+              window.location.pathname === "/courses" ? styles["selected"] : ""
+            }
+          >
+            Courses
+          </a>
+        </li>
+        <li>
+          <a
             href="/about"
             className={
               window.location.pathname === "/about" ? styles["selected"] : ""
