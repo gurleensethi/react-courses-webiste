@@ -5,6 +5,7 @@ import { AboutPage } from "../about-page/AboutPage";
 import { HomePage } from "../home-page/HomePage";
 import { CoursesPage } from "../course-page/CoursesPage";
 import { Route, Switch } from "react-router-dom";
+import { NotFoundPage } from "../not-found-page/NotFoundPage";
 
 export const MainPage: React.FunctionComponent = (props) => {
   return (
@@ -14,6 +15,7 @@ export const MainPage: React.FunctionComponent = (props) => {
           <Route exact path="/" component={HomePage} />
           <Route path="/courses" component={CoursesPage} />
           <Route path="/about" component={AboutPage} />
+          <Route component={NotFoundPage} />
         </Switch>
       </div>
       <div className={styles["navigation"]}>
