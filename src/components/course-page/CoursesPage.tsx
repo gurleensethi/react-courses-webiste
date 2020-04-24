@@ -4,7 +4,7 @@ import { Course } from "src/types";
 import { getCourses } from "src/api";
 import { CourseList } from "../common/course-list/CourseList";
 
-export const CoursesPage: React.FunctionComponent = (props) => {
+export const CoursesPage: React.FunctionComponent = () => {
   const [courses, setCoruses] = React.useState<Course[]>([]);
   React.useEffect(() => {
     getCourses().then((data) => {

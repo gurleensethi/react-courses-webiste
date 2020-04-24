@@ -1,41 +1,37 @@
 import React from "react";
 import styles from "./Navigation.module.css";
+import { NavLink } from "react-router-dom";
+
+const navOptions = [
+  {
+    name: "Home",
+    path: "/",
+  },
+  {
+    name: "Courses",
+    path: "/courses",
+  },
+  {
+    name: "About",
+    path: "/about",
+  },
+];
 
 export const Navigation: React.FunctionComponent = (props) => {
   return (
-    <nav className={styles["container"]}>
-      <ul>
-        <li>
-          <a
-            href="/"
-            className={
-              window.location.pathname === "/" ? styles["selected"] : ""
-            }
+    <div className={styles["container"]}>
+      <nav>
+        {navOptions.map((option) => (
+          <NavLink
+            to={option.path}
+            activeClassName={styles["selected"]}
+            key={option.path}
+            exact={true}
           >
-            Home
-          </a>
-        </li>
-        <li>
-          <a
-            href="/courses"
-            className={
-              window.location.pathname === "/courses" ? styles["selected"] : ""
-            }
-          >
-            Courses
-          </a>
-        </li>
-        <li>
-          <a
-            href="/about"
-            className={
-              window.location.pathname === "/about" ? styles["selected"] : ""
-            }
-          >
-            About
-          </a>
-        </li>
-      </ul>
-    </nav>
+            {option.name}
+          </NavLink>
+        ))}
+      </nav>
+    </div>
   );
 };

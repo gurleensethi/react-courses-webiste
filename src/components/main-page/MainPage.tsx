@@ -4,22 +4,18 @@ import { Navigation } from "../common/navigation/Navigation";
 import { AboutPage } from "../about-page/AboutPage";
 import { HomePage } from "../home-page/HomePage";
 import { CoursesPage } from "../course-page/CoursesPage";
+import { Route, Switch } from "react-router-dom";
 
 export const MainPage: React.FunctionComponent = (props) => {
-  const getPage = () => {
-    switch (window.location.pathname) {
-      case "/about":
-        return <AboutPage />;
-      case "/courses":
-        return <CoursesPage />;
-      default:
-        return <HomePage />;
-    }
-  };
-
   return (
     <div className={styles["container"]}>
-      <div className={styles["content"]}>{getPage()}</div>
+      <div className={styles["content"]}>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/courses" component={CoursesPage} />
+          <Route path="/about" component={AboutPage} />
+        </Switch>
+      </div>
       <div className={styles["navigation"]}>
         <Navigation />
       </div>

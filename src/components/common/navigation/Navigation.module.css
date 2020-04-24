@@ -2,9 +2,7 @@
   display: flex;
 }
 
-.container ul {
-  list-style: none;
-  list-style-type: none;
+.container nav {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -14,15 +12,16 @@
   box-shadow: 0px -5px 10px #f0f0f0;
 }
 
-.container ul a {
+.container nav a {
   text-decoration: none;
   color: grey;
 }
 
-.container ul a:hover {
+.container nav a:hover {
   color: black;
 }
 
-.container ul a.selected {
+.container nav a.selected {
   color: black;
+  font-weight: bold;
 }
