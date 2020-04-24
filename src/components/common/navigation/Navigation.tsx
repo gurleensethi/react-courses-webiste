@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Navigation.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
+import path from "path";
 
 const navOptions = [
   {
@@ -17,13 +18,13 @@ const navOptions = [
   },
 ];
 
-export const Navigation: React.FunctionComponent = (props) => {
+export const Navigation = withRouter(({ match }) => {
   return (
     <div className={styles["container"]}>
       <nav>
         {navOptions.map((option) => (
           <NavLink
-            to={option.path}
+            to={path.join(match.url, option.path)}
             activeClassName={styles["selected"]}
             key={option.path}
             exact={true}
@@ -34,4 +35,4 @@ export const Navigation: React.FunctionComponent = (props) => {
       </nav>
     </div>
   );
-};
+});
