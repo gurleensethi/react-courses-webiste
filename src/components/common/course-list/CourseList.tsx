@@ -11,7 +11,7 @@ export const CourseList: React.FunctionComponent<Props> = ({ courses }) => {
   return (
     <ul className={styles["course-list"]}>
       {courses.map((course) => (
-        <li key={course.authorId} className="card card-hover">
+        <li key={course.id} className="card card-hover">
           <Link to={`/course/${course.id}`}>
             <h3 className={styles.heading}>{course.title}</h3>
           </Link>

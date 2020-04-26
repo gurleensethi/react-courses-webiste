@@ -1,6 +1,6 @@
 import { Course } from "src/types";
 
-const courses = [
+const courses: Course[] = [
   {
     id: "1",
     title: "Introduction to Programming",
@@ -20,5 +20,20 @@ export async function getCourses(): Promise<Course[]> {
 }
 
 export async function saveCourse(course: Course): Promise<void> {
-  courses.push(course);
+  if (course.id) {
+    const index = courses.findIndex((c) => c.id === course.id);
+    if (index) {
+      courses[index] = { ...courses[index], ...course };
+    }
+  } else {
+    course.id = `${Math.random()}-${Math.random()}-${Math.random()}`;
+    courses.push(course);
+  }
+}
+
+export async function getCourseById(
+  courseId: string
+): Promise<Course | undefined> {
+  const course = courses.find((c) => c.id === courseId);
+  return course;
 }

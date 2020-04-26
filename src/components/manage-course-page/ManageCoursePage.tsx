@@ -2,11 +2,11 @@ import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import CourseForm from "../course-form/CourseForm";
 import { Course } from "src/types";
-import { saveCourse } from "src/api";
+import { saveCourse, getCourseById } from "src/api";
 
-export const ManageCoursePage: React.FunctionComponent<RouteComponentProps> = ({
-  history,
-}) => {
+export const ManageCoursePage: React.FunctionComponent<RouteComponentProps<{
+  courseId: string | undefined;
+}>> = ({ match, history }) => {
   const [course, setCourse] = React.useState<Partial<Course>>({
     category: "",
     title: "",
@@ -16,6 +16,17 @@ export const ManageCoursePage: React.FunctionComponent<RouteComponentProps> = ({
   const [errors, setErrors] = React.useState<
     Partial<{ [key in keyof Course]: string }>
   >({});
+
+  React.useEffect(() => {
+    const courseId = match.params.courseId;
+    if (courseId) {
+      getCourseById(courseId).then((course) => {
+        if (course) {
+          setCourse(course);
+        }
+      });
+    }
+  }, [match.params.courseId]);
 
   const isFormValid = () => {
     const _errors: Partial<{ [key in keyof Course]: string }> = {};
@@ -43,7 +54,6 @@ export const ManageCoursePage: React.FunctionComponent<RouteComponentProps> = ({
     if (isFormValid()) {
       await saveCourse(course as Course);
       history.push("/home/courses");
-      setCourse({ category: "", title: "", authorId: "" });
     }
   };
 
