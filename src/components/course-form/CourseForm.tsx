@@ -1,5 +1,6 @@
 import React from "react";
 import { Course } from "src/types";
+import TextInput from "../common/text-input/TextInput";
 
 interface Props {
   course: Partial<Course>;
@@ -14,18 +15,13 @@ const CourseForm: React.FunctionComponent<Props> = ({
 
   return (
     <form>
-      <div>
-        <label>Title</label>
-        <div>
-          <input
-            id="title"
-            type="text"
-            name="title"
-            value={title}
-            onChange={(e) => handleDataChange("title", e.target.value)}
-          />
-        </div>
-      </div>
+      <TextInput
+        id="title"
+        name="title"
+        label="Title"
+        value={title}
+        onChange={(value) => handleDataChange("title", value)}
+      />
 
       <div>
         <label>Author</label>
@@ -43,18 +39,13 @@ const CourseForm: React.FunctionComponent<Props> = ({
         </div>
       </div>
 
-      <div>
-        <label>Category</label>
-        <div>
-          <input
-            id="category"
-            type="text"
-            name="category"
-            value={category}
-            onChange={(e) => handleDataChange("category", e.target.value)}
-          />
-        </div>
-      </div>
+      <TextInput
+        id="category"
+        name="category"
+        label="Category"
+        value={category}
+        onChange={(value) => handleDataChange("category", value)}
+      />
 
       <button type="submit">Save</button>
     </form>
