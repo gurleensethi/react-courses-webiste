@@ -4,7 +4,9 @@ import CourseForm from "../course-form/CourseForm";
 import { Course } from "src/types";
 import { saveCourse } from "src/api";
 
-export const ManageCoursePage: React.FunctionComponent<RouteComponentProps> = () => {
+export const ManageCoursePage: React.FunctionComponent<RouteComponentProps> = ({
+  history,
+}) => {
   const [course, setCourse] = React.useState<Partial<Course>>({
     category: "",
     title: "",
@@ -15,8 +17,9 @@ export const ManageCoursePage: React.FunctionComponent<RouteComponentProps> = ()
     setCourse({ ...course, [key]: value });
   };
 
-  const handleSubmit = () => {
-    saveCourse(course as Course);
+  const handleSubmit = async () => {
+    await saveCourse(course as Course);
+    history.push("/home/courses");
     setCourse({ category: "", title: "", authorId: "" });
   };
 
