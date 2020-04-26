@@ -3,6 +3,7 @@ import styles from "./CoursesPage.module.css";
 import { Course } from "src/types";
 import { getCourses } from "src/api";
 import { CourseList } from "../common/course-list/CourseList";
+import { Link } from "react-router-dom";
 
 export const CoursesPage: React.FunctionComponent = () => {
   const [courses, setCoruses] = React.useState<Course[]>([]);
@@ -14,9 +15,8 @@ export const CoursesPage: React.FunctionComponent = () => {
 
   return (
     <div className={styles["container"]}>
-      <ul className={styles["course-list"]}>
-        <CourseList courses={courses} />
-      </ul>
+      <Link to="/course">Add Course</Link>
+      <CourseList courses={courses} />
     </div>
   );
 };

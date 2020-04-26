@@ -9,7 +9,8 @@ const App: React.FunctionComponent = () => {
   return (
     <div className="root">
       <Switch>
-        <Route path="/courses/:courseId" component={ManageCoursePage} />
+        <Route path="/course/:courseId" component={ManageCoursePage} />
+        <Route path="/course/" component={ManageCoursePage} />
         <Route path="/home" component={MainPage} />
         <Route component={NotFoundPage} />
       </Switch>
