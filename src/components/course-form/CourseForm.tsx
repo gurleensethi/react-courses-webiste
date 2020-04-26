@@ -6,12 +6,14 @@ interface Props {
   course: Partial<Course>;
   handleDataChange: (id: keyof Course, value: any) => void;
   handleSubmit: () => void;
+  errors: Partial<{ [key in keyof Course]: string }>;
 }
 
 const CourseForm: React.FunctionComponent<Props> = ({
   course,
   handleDataChange,
   handleSubmit,
+  errors,
 }) => {
   const { authorId, category, title } = course;
 
@@ -27,6 +29,7 @@ const CourseForm: React.FunctionComponent<Props> = ({
         name="title"
         label="Title"
         value={title}
+        error={errors.title}
         onChange={(value) => handleDataChange("title", value)}
       />
 
@@ -44,6 +47,7 @@ const CourseForm: React.FunctionComponent<Props> = ({
             <option value="1">Scott Allen</option>
           </select>
         </div>
+        {errors.authorId && <div>{errors.authorId}</div>}
       </div>
 
       <TextInput
@@ -51,6 +55,7 @@ const CourseForm: React.FunctionComponent<Props> = ({
         name="category"
         label="Category"
         value={category}
+        error={errors.authorId}
         onChange={(value) => handleDataChange("category", value)}
       />
 

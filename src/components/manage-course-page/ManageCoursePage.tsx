@@ -13,14 +13,38 @@ export const ManageCoursePage: React.FunctionComponent<RouteComponentProps> = ({
     authorId: "",
   });
 
+  const [errors, setErrors] = React.useState<
+    Partial<{ [key in keyof Course]: string }>
+  >({});
+
+  const isFormValid = () => {
+    const _errors: Partial<{ [key in keyof Course]: string }> = {};
+
+    if (!course.title) {
+      _errors.title = "Title is required";
+    }
+    if (!course.category) {
+      _errors.category = "Category is required";
+    }
+    if (!course.authorId) {
+      _errors.authorId = "Author is required";
+    }
+
+    setErrors(_errors);
+
+    return Object.keys(_errors).length === 0;
+  };
+
   const handleDataChange = (key: keyof Course, value: any) => {
     setCourse({ ...course, [key]: value });
   };
 
   const handleSubmit = async () => {
-    await saveCourse(course as Course);
-    history.push("/home/courses");
-    setCourse({ category: "", title: "", authorId: "" });
+    if (isFormValid()) {
+      await saveCourse(course as Course);
+      history.push("/home/courses");
+      setCourse({ category: "", title: "", authorId: "" });
+    }
   };
 
   return (
@@ -30,6 +54,7 @@ export const ManageCoursePage: React.FunctionComponent<RouteComponentProps> = ({
         course={course}
         handleDataChange={handleDataChange}
         handleSubmit={handleSubmit}
+        errors={errors}
       />
     </>
   );
