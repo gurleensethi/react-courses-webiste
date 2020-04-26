@@ -18,3 +18,7 @@ const courses = [
 export async function getCourses(): Promise<Course[]> {
   return courses;
 }
+
+export async function saveCourse(course: Course): Promise<void> {
+  courses.push(course);
+}

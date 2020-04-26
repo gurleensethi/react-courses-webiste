@@ -5,16 +5,23 @@ import TextInput from "../common/text-input/TextInput";
 interface Props {
   course: Partial<Course>;
   handleDataChange: (id: keyof Course, value: any) => void;
+  handleSubmit: () => void;
 }
 
 const CourseForm: React.FunctionComponent<Props> = ({
   course,
   handleDataChange,
+  handleSubmit,
 }) => {
   const { authorId, category, title } = course;
 
   return (
-    <form>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+    >
       <TextInput
         id="title"
         name="title"
