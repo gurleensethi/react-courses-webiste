@@ -5,7 +5,7 @@ import { Course } from "src/types";
 
 const CHANGE_EVENT = "change";
 
-export class CourseStore {
+class CourseStore {
   private courses: Course[] = [];
 
   private eventEmitter = new EventEmitter();
@@ -39,7 +39,7 @@ export class CourseStore {
       switch (action.type) {
         case actionsTypes.CREATE_COURSE: {
           this.courses.push(action.payload);
-          store.emitChange();
+          courseStore.emitChange();
           break;
         }
         default:
@@ -50,5 +50,5 @@ export class CourseStore {
   }
 }
 
-const store = new CourseStore();
-export default store;
+const courseStore = new CourseStore();
+export default courseStore;

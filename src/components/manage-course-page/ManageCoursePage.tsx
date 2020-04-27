@@ -2,7 +2,8 @@ import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import CourseForm from "../course-form/CourseForm";
 import { Course } from "src/types";
-import { saveCourse, getCourseById } from "src/api";
+import courseStore from "../../data/stores/course-store";
+import { saveCourse } from "src/data/actions/course-actions";
 
 export const ManageCoursePage: React.FunctionComponent<RouteComponentProps<{
   courseId: string | undefined;
@@ -20,11 +21,10 @@ export const ManageCoursePage: React.FunctionComponent<RouteComponentProps<{
   React.useEffect(() => {
     const courseId = match.params.courseId;
     if (courseId) {
-      getCourseById(courseId).then((course) => {
-        if (course) {
-          setCourse(course);
-        }
-      });
+      const course = courseStore.getCourseById(courseId);
+      if (course) {
+        setCourse(course);
+      }
     }
   }, [match.params.courseId]);
 
@@ -52,7 +52,7 @@ export const ManageCoursePage: React.FunctionComponent<RouteComponentProps<{
 
   const handleSubmit = async () => {
     if (isFormValid()) {
-      await saveCourse(course as Course);
+      saveCourse(course as Course);
       history.push("/home/courses");
     }
   };
