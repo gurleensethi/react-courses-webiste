@@ -19,15 +19,20 @@ export async function getCourses(): Promise<Course[]> {
   return courses;
 }
 
-export async function saveCourse(course: Course): Promise<void> {
+export async function saveCourse(course: Course): Promise<Course> {
   if (course.id) {
     const index = courses.findIndex((c) => c.id === course.id);
     if (index) {
       courses[index] = { ...courses[index], ...course };
     }
+    return courses[index];
   } else {
-    course.id = `${Math.random()}-${Math.random()}-${Math.random()}`;
-    courses.push(course);
+    const newCourse: Course = {
+      id: `${Math.random()}-${Math.random()}-${Math.random()}`,
+      ...course,
+    };
+    courses.push(newCourse);
+    return newCourse;
   }
 }
 
@@ -36,4 +41,11 @@ export async function getCourseById(
 ): Promise<Course | undefined> {
   const course = courses.find((c) => c.id === courseId);
   return course;
+}
+
+export async function deleteCourse(courseId: string) {
+  const index = courses.findIndex((c) => c.id === courseId);
+  if (index) {
+    courses.splice(index, 1);
+  }
 }

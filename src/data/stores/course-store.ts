@@ -30,15 +30,37 @@ class CourseStore {
     return this.courses;
   }
 
-  getCourseById(id: string): Course | undefined {
+  getCourseById(id: string | undefined): Course | undefined {
     return this.courses.find((c) => c.id === id);
   }
 
   private registerWithDispatcher() {
     dispatcher.register((action: any) => {
+      console.log(action);
+
       switch (action.type) {
         case actionsTypes.CREATE_COURSE: {
           this.courses.push(action.payload);
+          courseStore.emitChange();
+          break;
+        }
+        case actionsTypes.LOAD_COURSES: {
+          this.courses = action.payload;
+          courseStore.emitChange();
+          break;
+        }
+        case actionsTypes.UPDATE_COURSE: {
+          this.courses = this.courses.map((course) => {
+            if (course.id === action.payload.id) {
+              return { ...course, ...action.payload };
+            }
+            return course;
+          });
+          courseStore.emitChange();
+          break;
+        }
+        case actionsTypes.DELETE_COURSE: {
+          this.courses = this.courses.filter((c) => c.id !== action.payload);
           courseStore.emitChange();
           break;
         }

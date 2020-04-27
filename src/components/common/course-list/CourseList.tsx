@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 
 interface Props {
   courses: Course[];
+  deleteCourse: (course: Course) => void;
 }
 
-export const CourseList: React.FunctionComponent<Props> = ({ courses }) => {
+export const CourseList: React.FunctionComponent<Props> = ({
+  courses,
+  deleteCourse,
+}) => {
   return (
     <ul className={styles["course-list"]}>
       {courses.map((course) => (
@@ -17,6 +21,7 @@ export const CourseList: React.FunctionComponent<Props> = ({ courses }) => {
           </Link>
           <div className={styles.title}>Category</div>
           <div className={styles["content-title"]}>{course.category}</div>
+          <button onClick={() => deleteCourse(course)}>Delete</button>
         </li>
       ))}
     </ul>

@@ -8,17 +8,19 @@ import { saveCourse } from "src/data/actions/course-actions";
 export const ManageCoursePage: React.FunctionComponent<RouteComponentProps<{
   courseId: string | undefined;
 }>> = ({ match, history }) => {
-  const [course, setCourse] = React.useState<Partial<Course>>({
-    category: "",
-    title: "",
-    authorId: "",
-  });
+  const [course, setCourse] = React.useState<Partial<Course>>(
+    courseStore.getCourseById(match.params.courseId) || {
+      category: "",
+      title: "",
+      authorId: "",
+    }
+  );
 
   const [errors, setErrors] = React.useState<
     Partial<{ [key in keyof Course]: string }>
   >({});
 
-  React.useEffect(() => {
+  const onChange = React.useCallback(() => {
     const courseId = match.params.courseId;
     if (courseId) {
       const course = courseStore.getCourseById(courseId);
@@ -27,6 +29,11 @@ export const ManageCoursePage: React.FunctionComponent<RouteComponentProps<{
       }
     }
   }, [match.params.courseId]);
+
+  React.useEffect(() => {
+    courseStore.addChangeListener(onChange);
+    return () => courseStore.removeChangeListener(onChange);
+  }, [onChange, match.params.courseId]);
 
   const isFormValid = () => {
     const _errors: Partial<{ [key in keyof Course]: string }> = {};
@@ -52,7 +59,7 @@ export const ManageCoursePage: React.FunctionComponent<RouteComponentProps<{
 
   const handleSubmit = async () => {
     if (isFormValid()) {
-      saveCourse(course as Course);
+      await saveCourse(course as Course);
       history.push("/home/courses");
     }
   };
