@@ -155,3 +155,54 @@ body {
 .card.card-hover:hover {
   box-shadow: 0px 0px 4px #e1e1e1, 0px 2px 4px #e1e1e1;
 }
+
+.btn {
+  text-decoration: none;
+  border: none;
+  background: none;
+  background-color: none;
+  font-size: 16px;
+  padding: 8px;
+  display: inline-block;
+  color: white;
+  background-color: rgb(84, 104, 247);
+  box-shadow: 1px 1px 2px rgb(112, 128, 255);
+  border-radius: 4px;
+}
+
+.btn:hover {
+  box-shadow: 1px 1px 4px rgb(112, 128, 255);
+}
+
+.page-heading {
+  font-size: 24px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+input {
+  border: none;
+  border-bottom: 2px solid #e1e1e1;
+  padding: 8px 0px;
+  color: #505050;
+  font-size: 20px;
+  width: 100%;
+}
+
+input:focus {
+  border-bottom: 2px solid rgb(112, 128, 255);
+}
+
+select {
+  width: 100%;
+}
+
+.error-msg {
+  color: red;
+  font-size: 12px;
+}

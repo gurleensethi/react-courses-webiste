@@ -22,7 +22,9 @@ export const CoursesPage: React.FunctionComponent = () => {
 
   return (
     <div className={styles["container"]}>
-      <Link to="/course">Add Course</Link>
+      <Link to="/course" className={`btn ${styles["add-course-btn"]}`}>
+        Add Course
+      </Link>
       <CourseList
         courses={courses}
         deleteCourse={(course) => deleteCourse(course.id)}

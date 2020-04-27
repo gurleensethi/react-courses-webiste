@@ -1,6 +1,7 @@
 import React from "react";
 import { Course } from "src/types";
 import TextInput from "../common/text-input/TextInput";
+import styles from "./CourseForm.module.css";
 
 interface Props {
   course: Partial<Course>;
@@ -19,6 +20,7 @@ const CourseForm: React.FunctionComponent<Props> = ({
 
   return (
     <form
+      className={styles.container}
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit();
@@ -34,7 +36,7 @@ const CourseForm: React.FunctionComponent<Props> = ({
       />
 
       <div>
-        <label>Author</label>
+        <label className={`label`}>Author</label>
         <div>
           <select
             id="author"
@@ -47,7 +49,11 @@ const CourseForm: React.FunctionComponent<Props> = ({
             <option value="1">Scott Allen</option>
           </select>
         </div>
-        {errors.authorId && <div>{errors.authorId}</div>}
+        {errors.authorId && (
+          <div className={`error-msg`} style={{ marginTop: "8px" }}>
+            {errors.authorId}
+          </div>
+        )}
       </div>
 
       <TextInput
@@ -59,7 +65,9 @@ const CourseForm: React.FunctionComponent<Props> = ({
         onChange={(value) => handleDataChange("category", value)}
       />
 
-      <button type="submit">Save</button>
+      <button type="submit" className={`btn`}>
+        Save
+      </button>
     </form>
   );
 };

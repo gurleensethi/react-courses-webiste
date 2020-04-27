@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 1px 4px #e1e1e1;
+  border-radius: 4px;
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.container > * {
+  margin-bottom: 24px;
+}
+
+.container > *:last-child {
+  margin-bottom: 0px;
+}

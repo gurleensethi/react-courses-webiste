@@ -4,6 +4,7 @@ import CourseForm from "../course-form/CourseForm";
 import { Course } from "src/types";
 import courseStore from "../../data/stores/course-store";
 import { saveCourse } from "src/data/actions/course-actions";
+import styles from "./ManageCoursePage.module.css";
 
 export const ManageCoursePage: React.FunctionComponent<RouteComponentProps<{
   courseId: string | undefined;
@@ -65,14 +66,18 @@ export const ManageCoursePage: React.FunctionComponent<RouteComponentProps<{
   };
 
   return (
-    <>
-      <h2>Manage Course</h2>
-      <CourseForm
-        course={course}
-        handleDataChange={handleDataChange}
-        handleSubmit={handleSubmit}
-        errors={errors}
-      />
-    </>
+    <div className={styles.container}>
+      <div className={styles["top-bar"]}>
+        <h2 className={`page-heading ${styles.heading}`}>Manage Course</h2>
+      </div>
+      <div className={styles.content}>
+        <CourseForm
+          course={course}
+          handleDataChange={handleDataChange}
+          handleSubmit={handleSubmit}
+          errors={errors}
+        />
+      </div>
+    </div>
   );
 };
