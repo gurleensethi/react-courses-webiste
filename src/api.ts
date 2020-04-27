@@ -22,7 +22,7 @@ export async function getCourses(): Promise<Course[]> {
 export async function saveCourse(course: Course): Promise<Course> {
   if (course.id) {
     const index = courses.findIndex((c) => c.id === course.id);
-    if (index) {
+    if (index !== -1) {
       courses[index] = { ...courses[index], ...course };
     }
     return courses[index];
@@ -45,7 +45,7 @@ export async function getCourseById(
 
 export async function deleteCourse(courseId: string) {
   const index = courses.findIndex((c) => c.id === courseId);
-  if (index) {
+  if (index !== -1) {
     courses.splice(index, 1);
   }
 }
