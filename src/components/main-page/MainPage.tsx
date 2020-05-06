@@ -6,6 +6,7 @@ import { HomePage } from "../home-page/HomePage";
 import { CoursesPage } from "../course-page/CoursesPage";
 import { Route, Switch, RouteComponentProps } from "react-router-dom";
 import path from "path";
+import { ManageCoursePage } from "../manage-course-page/ManageCoursePage";
 
 export const MainPage: React.FunctionComponent<RouteComponentProps> = ({
   match,
@@ -20,6 +21,14 @@ export const MainPage: React.FunctionComponent<RouteComponentProps> = ({
             component={CoursesPage}
           />
           <Route path={path.join(match.url, "about")} component={AboutPage} />
+          <Route
+            path={path.join(match.url, "/course/:courseId")}
+            component={ManageCoursePage}
+          />
+          <Route
+            path={path.join(match.url, "/course/")}
+            component={ManageCoursePage}
+          />
         </Switch>
       </div>
       <div className={styles["navigation"]}>
